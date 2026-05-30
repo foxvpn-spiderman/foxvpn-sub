@@ -3,8 +3,9 @@ const fs = require('fs');
 
 // ====================== CẤU HÌNH ======================
 const customers = {
-    "main":   "https://liangxin.xyz/api/v1/liangxin?OwO=116e49c7abce992495496077aaec9ee1",
-    "khach2": "https://liangxin.xyz/api/v1/liangxin?OwO=bf0333e5933861705f424388b634d771",
+    "main":     "https://liangxin.xyz/api/v1/liangxin?OwO=116e49c7abce992495496077aaec9ee1",
+    "khach2":   "https://liangxin.xyz/api/v1/liangxin?OwO=bf0333e5933861705f424388b634d771",
+    "khach17":  "https://liangxin.xyz/api/v1/liangxin?OwO=f372cd835413c38aff9aa7c1bf66745b",   // ← Khách 17
 };
 
 const oldDomain = "liangxin.xyz";     
