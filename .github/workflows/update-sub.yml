@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 */6 * * *'
   workflow_dispatch:
+    inputs:
+      customerId:
+        description: 'ID của khách (main, khach2, vip...)'
+        required: false
+        default: 'main'
 
 jobs:
   update:
@@ -26,10 +31,10 @@ jobs:
       - name: Fetch and Process Subscription
         env:
           SUB_URL: ${{ secrets.SUB_URL }}
-        run: node process-sub.js
+        run: node process-sub.js ${{ github.event.inputs.customerId }}
 
       - name: Commit & Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: '🔄 Update LiangXin Subscription'
-          file_pattern: 'sub.txt'
+          commit_message: '🔄 Update Subscription - ${{ github.event.inputs.customerId || "main" }}'
+          file_pattern: 'sub-*.txt'
