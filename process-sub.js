@@ -1,16 +1,20 @@
 const axios = require('axios');
 const fs = require('fs');
 
+// ====================== CẤU HÌNH ======================
 const customers = {
     "main":   "https://liangxin.xyz/api/v1/liangxin?OwO=116e49c7abce992495496077aaec9ee1",
     "khach2": "https://liangxin.xyz/api/v1/liangxin?OwO=bf0333e5933861705f424388b634d771",
 };
 
+const oldDomain = "liangxin.xyz";     
+const newDomain = "YOUR-NEW-DOMAIN.COM";   // ← THAY DOMAIN MỚI Ở ĐÂY
+
 async function processCustomer(id) {
     const url = customers[id];
     if (!url) {
         console.error(`❌ Không tìm thấy ID: ${id}`);
-        process.exit(1);
+        return;
     }
 
     console.log(`📥 Đang lấy subscription cho ${id}...`);
@@ -34,8 +38,22 @@ async function processCustomer(id) {
             let [link, name = "Node"] = line.split('#', 2);
             name = name.trim();
 
-            name = name.replace(/\|BGP\|流媒体|\|流媒体|\|BGP\|CTCU|\|BGP\|CUCM|\|CTCU|\|CUCM|\|Relay|\|Backup|\|Test/g, '');
+            // Thay domain
+            link = link.replace(new RegExp(oldDomain, 'gi'), newDomain);
+            link = link.replace(new RegExp(`sni=${oldDomain}`, 'gi'), `sni=${newDomain}`);
+            link = link.replace(new RegExp(`host=${oldDomain}`, 'gi'), `host=${newDomain}`);
 
+            // Xóa tag thừa
+            name = name.replace(/\|BGP\|流媒体|\|流媒体|\|BGP\|CTCU|\|BGP\|CUCM|\|CTCU|\|CUCM|\|Relay|\|Backup|\|Test|\|0\.1x/g, '');
+
+            // === THAY TÊN SERVER THEO YÊU CẦU ===
+            name = name
+                .replace(/tiktok|tik tok|抖音/gi, "TIKTOK FLASH")
+                .replace(/fb|facebook|fb speed|face book/gi, "FB SPEED")
+                .replace(/chatgpt|chat gpt|gpt/gi, "CHATGPT")
+                .replace(/gemini|google gemini/gi, "GEMINI");
+
+            // Thay tên quốc gia (giữ nguyên)
             name = name
                 .replace(/日本高速|日本专线|日本|JP|Japan/gi, "🇯🇵 JP")
                 .replace(/美国|USA|US|America/gi, "🇺🇸 US")
@@ -48,6 +66,7 @@ async function processCustomer(id) {
                 .replace(/\s+/g, ' ')
                 .trim();
 
+            // Thêm flag nếu chưa có
             if (!/🇯🇵|🇺🇸|🇭🇰|🇸🇬|🇹🇼|🇰🇷|🇬🇧/.test(name)) {
                 if (/jp|日本/i.test(name)) name = "🇯🇵 JP " + name;
                 else if (/us|美国/i.test(name)) name = "🇺🇸 US " + name;
@@ -60,11 +79,10 @@ async function processCustomer(id) {
         });
 
         fs.writeFileSync(`sub-${id}.txt`, lines.join('\n'));
-        console.log(`✅ Hoàn thành ${id} - ${lines.length} nodes`);
+        console.log(`✅ Hoàn thành ${id} → ${lines.length} nodes`);
 
     } catch (error) {
-        console.error(`❌ Lỗi khi xử lý ${id}:`, error.message);
-        process.exit(1);
+        console.error(`❌ Lỗi ${id}:`, error.message);
     }
 }
 
