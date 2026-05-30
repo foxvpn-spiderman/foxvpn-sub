@@ -31,10 +31,10 @@ jobs:
       - name: Fetch and Process Subscription
         env:
           SUB_URL: ${{ secrets.SUB_URL }}
-        run: node process-sub.js ${{ github.event.inputs.customerId || 'main' }}
+        run: node process-sub.js ${{ inputs.customerId || 'main' }}
 
       - name: Commit & Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: '🔄 Update Subscription - ${{ github.event.inputs.customerId || "main" }}'
+          commit_message: '🔄 Update Subscription - ${{ inputs.customerId || "main" }}'
           file_pattern: 'sub-*.txt'
