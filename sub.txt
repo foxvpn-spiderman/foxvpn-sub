@@ -19,7 +19,7 @@ dns:
     fallback: [1.1.1.1, 8.8.8.8]
     fallback-filter: { geoip: true, geoip-code: CN, geosite: [gfw], ipcidr: [240.0.0.0/4], domain: [+.google.com, +.facebook.com, +.youtube.com] }
 proxies:
-    - { name: '剩余流量：1 GB', type: vless, server: 127.0.0.1, port: 443, uuid: 05895320-5dfe-4bbf-9cb6-726f35868f59, udp: true, tls: true, skip-cert-verify: false, client-fingerprint: safari, servername: jp-lx.777076.xyz, network: ws, ws-opts: { path: /liangxin/jp1, headers: { Host: jp-lx.777076.xyz } } }
+    - { name: '剩余流量：98.75 GB', type: vless, server: 127.0.0.1, port: 443, uuid: 05895320-5dfe-4bbf-9cb6-726f35868f59, udp: true, tls: true, skip-cert-verify: false, client-fingerprint: safari, servername: jp-lx.777076.xyz, network: ws, ws-opts: { path: /liangxin/jp1, headers: { Host: jp-lx.777076.xyz } } }
     - { name: '距离下次重置剩余：15 天', type: vless, server: 127.0.0.1, port: 443, uuid: 05895320-5dfe-4bbf-9cb6-726f35868f59, udp: true, tls: true, skip-cert-verify: false, client-fingerprint: safari, servername: jp-lx.777076.xyz, network: ws, ws-opts: { path: /liangxin/jp1, headers: { Host: jp-lx.777076.xyz } } }
     - { name: 套餐到期：2026-06-14, type: vless, server: 127.0.0.1, port: 443, uuid: 05895320-5dfe-4bbf-9cb6-726f35868f59, udp: true, tls: true, skip-cert-verify: false, client-fingerprint: safari, servername: jp-lx.777076.xyz, network: ws, ws-opts: { path: /liangxin/jp1, headers: { Host: jp-lx.777076.xyz } } }
     - { name: 🇯🇵日本高速01|CTCU|0.5x, type: vless, server: cfyes.lxy1015.top, port: 443, uuid: 05895320-5dfe-4bbf-9cb6-726f35868f59, udp: true, tls: true, skip-cert-verify: false, client-fingerprint: safari, servername: jp-lx.777076.xyz, network: ws, ws-opts: { path: /liangxin/jp1, headers: { Host: jp-lx.777076.xyz } } }
